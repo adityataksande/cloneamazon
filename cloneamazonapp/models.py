@@ -9,14 +9,17 @@ class CustomUser(AbstractUser):
 
 class AdminUser(models.Model):
     profile_pic = models.FileField(default="")
+    auth_user_id = models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class StaffUser(models.Model):
     profile_pic = models.FileField(default="")
+    auth_user_id = models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class MerchantUser(models.Model):
+    auth_user_id = models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     profile_pic = models.FileField(default="")
     company_name = models.CharField(max_length=255)
     gst_details = models.CharField(max_length=255)
@@ -24,6 +27,7 @@ class MerchantUser(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 class CustomerUser(models.Model):
+    auth_user_id = models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     profile_pic = models.FileField(default="")
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -117,6 +121,7 @@ class ProductReviews(models.Model):
     id = models.AutoField(primary_key=True)
     product_id = models.ForeignKey(Products, on_delete=models.CASCADE )
     user_id = models.ForeignKey(CustomerUser,on_delete=models.CASCADE)
+    review_image = models.FileField()
     rating = models.CharField(default="5")
     review = models.TextField(default="")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -138,6 +143,7 @@ class ProductVarient(models.Model):
 
 class ProductVarientItems(models.Model):
     id = models.AutoField(primary_key=True)
+    product_varient_id = models.ForeignKey(ProductVarient,on_delete=models.CASCADE)
     product_id = models.ForeignKey(Products,on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
