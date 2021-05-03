@@ -8,3 +8,7 @@ def demoPage(requset):
 
 def demoPageTemplate(requset):
     return render(requset, "demo.html")
+
+
+def adminLogin(request):
+    return render(request,"admin_templates/signin.html")
