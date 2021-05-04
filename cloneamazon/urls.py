@@ -8,8 +8,10 @@ urlpatterns = [
     path('admin/', views.adminLogin),
     path('demo',views.demoPage),
     path('demoPage',views.demoPageTemplate),
+    path('admin_login_process',views.adminLoginProcess, name = "admin_login_process" ), 
 
     # PAGE FOR ADMIN
     path('admin_home',AdminViews.admin_home)
+
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
